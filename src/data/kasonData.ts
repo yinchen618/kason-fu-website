@@ -43,6 +43,7 @@ export interface ProductItem {
   specs: string;
   ceoSignatureNote: string;
   badge: string;
+  image?: string;
 }
 
 export interface HonorItem {
@@ -69,6 +70,29 @@ export const FOUNDER_INFO = {
     { label: "自研生醫冷萃專利", value: "7", unit: "項核心技術" },
     { label: "國際品質評鑑特金獎", value: "3", unit: "度蟬聯" }
   ]
+};
+
+export const FOUNDER_PORTRAITS = {
+  plantation: {
+    id: "plantation",
+    title: "茶園巡視照",
+    roleLabel: "高山茶園實地踏查",
+    caption: "傅克深身著深綠色訂製西裝，站在高山茶園中，眼神冷峻而堅定，展現對土地與品質的絕對掌控力。",
+    image: "/images/kason-tea-plantation.png",
+    location: "台灣 梨山海拔 2,200m 契作茶園",
+    dimension: "土地赤誠・踏足泥濘",
+    tag: "TERROIR & DEVOTION"
+  },
+  office: {
+    id: "office",
+    title: "總裁辦公室照",
+    roleLabel: "現代極簡決策空間",
+    caption: "在現代極簡的總裁辦公室內，手持自家頂級金箔嚴選茶罐，神情嚴謹完美主義。",
+    image: "/images/kason-office.png",
+    location: "台北信義 總裁辦公室",
+    dimension: "生醫理性・精準苛求",
+    tag: "PRECISION & PERFECTION"
+  }
 };
 
 export const TIMELINE_DATA: TimelineItem[] = [
@@ -258,27 +282,29 @@ export const FIELD_STORIES: FieldStory[] = [
 export const PRODUCTS_DATA: ProductItem[] = [
   {
     id: "prod-1",
-    name: "深霖・梨山雲霧有機極品冬茶禮盒",
-    englishName: "Lishan Cloud Reserve Organic High Mountain Tea",
+    name: "深霖・頂級高山烏龍茶禮盒",
+    englishName: "Formosa Supreme High Mountain Oolong Tea Reserve",
     category: "高山嚴選有機茶",
-    description: "海拔 2,200 公尺終年雲霧繚繞之梨山頂級冷霜茶園。手採一心二葉，透過深霖低溫冷鏈休眠技術封存高山幽冷花香與醇厚山頭氣韻。",
-    process: "古法輕發酵 × 48小時生醫遠紅外線低溫恆濕慢焙，保留高含量茶多酚與茶氨酸。",
-    origin: "台灣 台中梨山極上茶區（契作編號 #LS-018）",
-    specs: "75g × 2罐 原木金屬銅裝尊貴禮盒",
-    ceoSignatureNote: "開湯第一泡是冷冽的蘭花香，第三泡湧出深厚甘醇，這是只有未曾被農藥侵擾的原始森林泥土才能培育出的傲骨。",
-    badge: "Monde Selection 特級金獎"
+    description: "深森林綠與高貴金箔燙金包裝，襯托出台灣高山茶的奢華質感，適合作為高端企業送禮。嚴選阿里山與梨山海拔2000米以上冷霜茶園，手採一心二葉，封存高山幽冷花香與醇厚山頭氣韻。",
+    process: "古法輕發酵 × 48小時生醫低溫恆濕慢焙，保留極高茶多酚與茶氨酸活性。",
+    origin: "台灣 阿里山／梨山極上茶區（契作編號 #AL-008）",
+    specs: "精緻鐵罐 × 雙入 燙金深森林綠尊貴禮盒",
+    ceoSignatureNote: "深綠外盒與金箔標誌代表台灣土地的傲骨。開湯第一泡是冷冽的蘭花香，第三泡湧出深厚甘醇，這是原始森林泥土才能孕育出的世界頂級品質。",
+    badge: "Monde Selection 特級金獎 ｜ 企業贈禮首選",
+    image: "/images/product-tea-box.png"
   },
   {
     id: "prod-2",
-    name: "深霖・冷萃小分子黑羽土雞滴雞精",
-    englishName: "Bio-Purified Black Feather Drip Chicken Essence",
+    name: "深霖・黃金滴雞精 / 養生精粹",
+    englishName: "Golden Bio-Purified Essence of Chicken (Aurora Series)",
     category: "在地小農極致生醫加工品",
-    description: "嚴選台灣高山人道放牧 180 天原生黑羽黑肉土雞。不加一滴水，經 12 小時低溫漸進循環滴煉，利用專利微過濾純化小分子膠原胜肽與總支鏈胺基酸（BCAA）。",
-    process: "0脂肪、0膽固醇、0人工抗生素。小分子胜肽吸收率高於傳統煲湯 3.8 倍。",
+    description: "黑質感玻璃瓶身搭配金色瓶蓋，呈現濃郁溫潤、極致滋補的精品養生美學。嚴選台灣高山人道放牧 180 天原生黑羽黑肉土雞，結合中醫草本與生醫低溫萃取技術。",
+    process: "0脂肪、0膽固醇、0人工抗生素。小分子膠原胜肽與總支鏈胺基酸（BCAA）吸收率倍增。",
     origin: "台灣 嘉義竹崎高山原生林農場（契作編號 #CY-042）",
-    specs: "60ml × 12入 恆溫金屬銅禮盒",
-    ceoSignatureNote: "市面上的滴雞精常帶有腥臊味或過度油膩，深霖做的是生醫級清透甘醇。喝下去五秒鐘，溫熱直達胃底。",
-    badge: "世界頂級 iTQi 風味絕佳 3 星獎"
+    specs: "70ml 精緻黑玻金蓋瓶裝 ｜ 尊寵私藏禮盒",
+    ceoSignatureNote: "市面上的滴雞精常帶有腥臊味或過度油膩，深霖做的是生醫級清透甘醇。黑質感玻璃瓶身與金屬瓶蓋封存最高純度，喝下去五秒鐘，溫熱直達胃底。",
+    badge: "世界頂級 iTQi 風味絕佳 3 星獎 ｜ 頂級滋補美學",
+    image: "/images/product-essence.png"
   },
   {
     id: "prod-3",
@@ -312,7 +338,7 @@ export const HONORS_DATA: HonorItem[] = [
     title: "世界品質評鑑大賞 (Monde Selection) 特級金獎 (Grand Gold)",
     organization: "國際品質評鑑組織 (布魯塞爾)",
     category: "國際品質認證",
-    description: "以「深霖梨山極品有機冬茶」與「冷萃黑羽滴雞精」獲頒全球最高榮譽特級金獎，評審團特別讚譽其潔淨無添加之純粹風味。"
+    description: "以「深霖頂級高山烏龍茶禮盒」與「黃金滴雞精」獲頒全球最高榮譽特級金獎，評審團特別讚譽其潔淨無添加之純粹風味。"
   },
   {
     year: "2023",

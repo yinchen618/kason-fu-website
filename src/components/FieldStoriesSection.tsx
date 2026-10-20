@@ -6,6 +6,21 @@ export const FieldStoriesSection: React.FC = () => {
   const [activeStory, setActiveStory] = useState(0);
   const story = FIELD_STORIES[activeStory];
 
+  const storyImages = [
+    {
+      src: "/images/product-tea-box.png",
+      caption: "梨山2100m 嚴選烏龍茶盒 實物"
+    },
+    {
+      src: "/images/kason-tea-plantation.png",
+      caption: "傅克深身著深綠西裝踏查高山茶園"
+    },
+    {
+      src: "/images/kason-office.png",
+      caption: "信義總裁辦公室 逐批品鑑放行"
+    }
+  ];
+
   return (
     <section id="stories" className="py-24 bg-forest-950 relative overflow-hidden">
       
@@ -63,8 +78,8 @@ export const FieldStoriesSection: React.FC = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Story Details (8 cols) */}
-            <div className="lg:col-span-8 space-y-6">
+            {/* Story Details (7 cols) */}
+            <div className="lg:col-span-7 space-y-6">
               
               <div className="flex flex-wrap items-center gap-3">
                 <span className="px-3 py-1 rounded-full bg-bronze-500/20 border border-bronze-400/40 text-bronze-300 text-xs font-mono uppercase tracking-wider">
@@ -101,22 +116,42 @@ export const FieldStoriesSection: React.FC = () => {
 
             </div>
 
-            {/* Metric / Stat Highlight Box (4 cols) */}
-            <div className="lg:col-span-4 flex flex-col justify-center items-center text-center p-8 rounded-2xl bg-forest-950/80 border border-forest-800">
-              <span className="text-xs font-mono tracking-widest text-bronze-400 uppercase mb-2">
-                CRITICAL FACTOR
-              </span>
-              <div className="font-serif text-5xl sm:text-6xl font-black text-bronze-300 mb-2">
-                {story.metric}
-              </div>
-              <div className="text-xs text-sand-300 font-sans max-w-xs">
-                {story.metricLabel}
+            {/* Photo & Metric Highlight Box (5 cols) */}
+            <div className="lg:col-span-5 space-y-4">
+              
+              {/* Photo Box */}
+              <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-forest-950 border border-bronze-400/30 group shadow-lg">
+                <img
+                  src={storyImages[activeStory].src}
+                  alt={story.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 text-xs font-mono text-sand-300">
+                  {storyImages[activeStory].caption}
+                </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-forest-800 w-full flex items-center justify-between text-[11px] text-sand-400 font-mono">
-                <span>產地檔案編號</span>
-                <span className="text-bronze-300">#SL-202{activeStory + 1}</span>
+              {/* Metric Box */}
+              <div className="p-6 rounded-2xl bg-forest-950/80 border border-forest-800 flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] font-mono tracking-widest text-bronze-400 uppercase block">
+                    CRITICAL FACTOR
+                  </span>
+                  <div className="font-serif text-4xl font-black text-bronze-300 mt-1">
+                    {story.metric}
+                  </div>
+                  <div className="text-xs text-sand-300 font-sans mt-0.5">
+                    {story.metricLabel}
+                  </div>
+                </div>
+
+                <div className="text-right text-[11px] font-mono text-sand-400">
+                  <span>檔案編號</span>
+                  <div className="text-bronze-300 font-bold mt-0.5">#SL-202{activeStory + 1}</div>
+                </div>
               </div>
+
             </div>
 
           </div>

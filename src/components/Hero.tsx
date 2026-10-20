@@ -1,18 +1,21 @@
-import React from 'react';
-import { ArrowRight, Award, Compass, ShieldCheck, ChevronDown, CheckCircle2 } from 'lucide-react';
-import { FOUNDER_INFO } from '../data/kasonData';
+import React, { useState } from 'react';
+import { ArrowRight, Award, Compass, ShieldCheck, ChevronDown, CheckCircle2, Building, Mountain, Sparkles } from 'lucide-react';
+import { FOUNDER_INFO, FOUNDER_PORTRAITS } from '../data/kasonData';
 
 interface HeroProps {
   onOpenConcierge: (defaultType?: string) => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenConcierge }) => {
+  const [activePortrait, setActivePortrait] = useState<'plantation' | 'office'>('plantation');
+  const currentPortrait = FOUNDER_PORTRAITS[activePortrait];
+
   return (
     <section className="relative min-h-screen pt-28 pb-20 flex items-center justify-center overflow-hidden">
       {/* Background Ambience Elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(43,95,71,0.35),rgba(6,17,12,0.95))]" />
       
-      {/* Subtle Grid / Texture */}
+      {/* Subtle Texture */}
       <div 
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
@@ -21,12 +24,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConcierge }) => {
         }}
       />
 
-      {/* Decorative Metallic Bronze Halo */}
+      {/* Decorative Metallic Bronze Halos */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-bronze-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-forest-500/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           
           {/* Left Column: Headlines & Philosophy */}
           <div className="lg:col-span-7 space-y-6 text-left">
@@ -34,12 +37,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConcierge }) => {
             {/* Top Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forest-900/80 border border-bronze-400/30 text-bronze-300 text-xs tracking-wider uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-bronze-400 animate-pulse" />
-              <span>深霖生醫與嚴選農作 創辦人個人手記</span>
+              <span>深霖生醫與嚴選農作 創辦人官方站</span>
             </div>
 
             {/* Main Title & Name */}
             <div className="space-y-2">
-              <div className="flex items-baseline gap-3">
+              <div className="flex items-baseline gap-3 flex-wrap">
                 <h1 className="font-serif text-4xl sm:text-6xl font-bold tracking-tight text-sand-50">
                   {FOUNDER_INFO.name}
                 </h1>
@@ -56,7 +59,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConcierge }) => {
             </div>
 
             {/* Signature Quote Highlight */}
-            <div className="relative pl-6 py-2 border-l-2 border-bronze-400/70 bg-gradient-to-r from-forest-900/50 to-transparent rounded-r-xl">
+            <div className="relative pl-6 py-3 border-l-2 border-bronze-400/70 bg-gradient-to-r from-forest-900/60 to-transparent rounded-r-xl">
               <div className="text-bronze-400 text-3xl font-serif absolute -top-3 left-2 opacity-40 select-none">“</div>
               <p className="font-serif text-lg sm:text-xl text-sand-100 font-medium leading-relaxed italic">
                 {FOUNDER_INFO.coreQuote}
@@ -111,94 +114,108 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConcierge }) => {
 
           </div>
 
-          {/* Right Column: Visual Portrait / Identity Monogram Card */}
-          <div className="lg:col-span-5 flex justify-center">
+          {/* Right Column: Real Photographic Portrait Showcase */}
+          <div className="lg:col-span-5 flex flex-col items-center">
             <div className="relative w-full max-w-md">
               
               {/* Outer decorative bronze metallic frame */}
-              <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-b from-bronze-400/40 via-bronze-600/20 to-forest-800/60 blur-sm" />
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-b from-bronze-400/50 via-bronze-600/30 to-forest-800/70 blur-sm" />
               
-              <div className="relative rounded-2xl bg-gradient-to-b from-forest-900 to-forest-950 border border-bronze-400/50 p-6 sm:p-8 shadow-2xl overflow-hidden">
+              <div className="relative rounded-3xl bg-forest-950 border border-bronze-400/60 p-4 sm:p-5 shadow-2xl overflow-hidden">
                 
-                {/* Background watermark badge */}
-                <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-forest-800/30 border border-bronze-500/10 flex items-center justify-center font-serif text-bronze-300/10 text-9xl select-none pointer-events-none">
-                  霖
+                {/* Switcher Tabs between Plantation and Office */}
+                <div className="flex items-center justify-between pb-3 mb-3 border-b border-forest-800/80 text-xs">
+                  <div className="flex items-center gap-1.5 p-1 rounded-xl bg-forest-900 border border-forest-800">
+                    <button
+                      onClick={() => setActivePortrait('plantation')}
+                      className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-medium transition-all ${
+                        activePortrait === 'plantation'
+                          ? 'bg-bronze-500 text-forest-950 shadow-sm'
+                          : 'text-sand-300 hover:text-sand-50'
+                      }`}
+                    >
+                      <Mountain className="w-3.5 h-3.5" />
+                      <span>茶園巡視實景</span>
+                    </button>
+                    <button
+                      onClick={() => setActivePortrait('office')}
+                      className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-medium transition-all ${
+                        activePortrait === 'office'
+                          ? 'bg-bronze-500 text-forest-950 shadow-sm'
+                          : 'text-sand-300 hover:text-sand-50'
+                      }`}
+                    >
+                      <Building className="w-3.5 h-3.5" />
+                      <span>總裁辦公室</span>
+                    </button>
+                  </div>
+
+                  <span className="text-[10px] font-mono text-bronze-400 tracking-wider hidden sm:inline">
+                    {currentPortrait.tag}
+                  </span>
                 </div>
 
-                {/* Identity Header */}
-                <div className="flex items-center justify-between pb-6 border-b border-forest-800">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-forest-800 border border-bronze-400/40 flex items-center justify-center text-bronze-300 font-serif font-bold text-2xl shadow-inner">
-                      深
-                    </div>
-                    <div>
-                      <div className="text-xs uppercase tracking-widest text-bronze-400 font-mono">EST. 2020</div>
-                      <div className="text-sand-100 font-serif font-semibold text-sm">SHEN LIN BIONICS</div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className="inline-block px-2.5 py-1 rounded bg-bronze-500/10 border border-bronze-400/30 text-bronze-300 text-[11px] font-mono">
-                      TAIWAN SELECT
+                {/* Photo Display Container */}
+                <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-forest-900 border border-forest-800 shadow-inner group">
+                  <img
+                    src={currentPortrait.image}
+                    alt={currentPortrait.title}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                  
+                  {/* Subtle Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/20 to-transparent opacity-85" />
+
+                  {/* Top Floating Badge */}
+                  <div className="absolute top-3 left-3 flex items-center gap-2">
+                    <span className="px-2.5 py-1 rounded-full bg-forest-950/80 backdrop-blur-md border border-bronze-400/40 text-[11px] font-mono text-bronze-300 flex items-center gap-1.5 shadow-md">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      {currentPortrait.dimension}
                     </span>
                   </div>
-                </div>
 
-                {/* Character Silhouette / Styling Portrait Element */}
-                <div className="my-6 p-6 rounded-xl bg-forest-950/80 border border-forest-800/90 relative">
-                  <div className="flex items-center gap-4">
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-forest-800 via-forest-700 to-bronze-700 p-0.5 shadow-lg">
-                      <div className="w-full h-full rounded-full bg-forest-950 flex items-center justify-center text-bronze-300 font-serif text-3xl font-bold">
-                        KF
-                      </div>
+                  {/* Bottom Portrait Info Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 space-y-1.5">
+                    <div className="flex items-center justify-between text-xs font-mono text-bronze-300">
+                      <span className="flex items-center gap-1">
+                        <Compass className="w-3.5 h-3.5 text-bronze-400" />
+                        {currentPortrait.location}
+                      </span>
+                      <span className="text-sand-400">傅克深 Kason Fu</span>
                     </div>
-                    <div className="space-y-1">
-                      <div className="text-base font-serif font-semibold text-sand-50">
-                        傅克深 ｜ Kason Fu
-                      </div>
-                      <div className="text-xs text-bronze-300/80">
-                        海外生醫二代革新者
-                      </div>
-                      <div className="text-[11px] text-sand-400">
-                        外表冷峻執著，骨子裡對台灣土地品質有極強偏執
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Field inspection badge */}
-                  <div className="mt-4 pt-3 border-t border-forest-800/60 flex items-center justify-between text-[11px] text-sand-400 font-mono">
-                    <span className="flex items-center gap-1.5 text-bronze-300">
-                      <Compass className="w-3.5 h-3.5 text-bronze-400" />
-                      現場稽核：南投梨山／嘉義竹崎
-                    </span>
-                    <span className="text-emerald-400">● 嚴選監理中</span>
+                    <p className="text-xs text-sand-100 font-light leading-relaxed text-justify line-clamp-2">
+                      {currentPortrait.caption}
+                    </p>
                   </div>
                 </div>
 
-                {/* Core Stats Grid */}
-                <div className="grid grid-cols-2 gap-3 pt-2">
-                  {FOUNDER_INFO.stats.map((stat, idx) => (
-                    <div key={idx} className="p-3 rounded-lg bg-forest-900/60 border border-forest-800/80">
-                      <div className="text-xs text-sand-400 font-sans">{stat.label}</div>
-                      <div className="mt-1 flex items-baseline gap-1">
-                        <span className="text-xl font-serif font-bold text-bronze-300">{stat.value}</span>
-                        <span className="text-[11px] text-bronze-400/80">{stat.unit}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Bottom Signature Area */}
-                <div className="mt-6 pt-4 border-t border-forest-800 flex items-center justify-between">
-                  <div className="text-[11px] text-sand-400">
-                    品質責任簽名
-                  </div>
-                  <div className="font-serif italic text-bronze-300 text-sm tracking-wider">
-                    Kason Fu 傅克深
-                  </div>
+                {/* Bottom Quality Guarantee Stamp */}
+                <div className="mt-3 pt-3 border-t border-forest-800/80 flex items-center justify-between text-[11px] font-mono text-sand-400">
+                  <span className="flex items-center gap-1 text-bronze-300">
+                    <ShieldCheck className="w-3.5 h-3.5 text-bronze-400" />
+                    深霖生醫與嚴選農作
+                  </span>
+                  <span className="italic font-serif text-bronze-400 text-xs">
+                    Kason Fu 簽章
+                  </span>
                 </div>
 
               </div>
             </div>
+
+            {/* Quick stats under the photo */}
+            <div className="w-full max-w-md mt-4 grid grid-cols-2 gap-3">
+              {FOUNDER_INFO.stats.slice(0, 2).map((stat, idx) => (
+                <div key={idx} className="p-3 rounded-xl bg-forest-900/60 border border-forest-800/80 text-center">
+                  <div className="text-[11px] text-sand-400">{stat.label}</div>
+                  <div className="text-base font-serif font-bold text-bronze-300 mt-0.5">
+                    {stat.value} <span className="text-[10px] text-sand-400 font-normal">{stat.unit}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
           </div>
 
         </div>
